@@ -43,7 +43,7 @@ Este proyecto es un **MVP de lista de tareas** construido con React Native y Exp
 
 ```bash
 # 1. Crea la plantilla Expo
-npx create-expo-app@latest task-mvp
+npx create-expo-app@latest task-mvp --template blank
 
 # 2. Entra al directorio del proyecto
 cd task-mvp
