@@ -59,10 +59,10 @@ yarn
 npm install @react-navigation/native @react-navigation/stack
 
 # Peers de React Navigation
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
 # AsyncStorage para persistencia
-expo install @react-native-async-storage/async-storage
+npm install @react-native-async-storage/async-storage
 
 
 ## Estructura del proyecto
