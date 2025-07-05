@@ -79,17 +79,17 @@ task-mvp/
 
 ├─ navigation/
 
-│  └─ AppNavigator.js
+│  └─ AppNavigator.jsx
 
 ├─ screens/
 
-│  ├─ TaskListScreen.js
+│  ├─ TaskListScreen.jsx
 
-│  └─ AddTaskScreen.js
+│  └─ AddTaskScreen.jsx
 
 └─ components/
 
-   └─ TaskItem.js
+   └─ TaskItem.jsx
 
 
 - App.js: Punto de entrada. Importa y renderiza AppNavigator.
