@@ -43,7 +43,7 @@ Este proyecto es un **MVP de lista de tareas** construido con React Native y Exp
 
 ```bash
 # 1. Crea la plantilla Expo
-npx create-expo-app@latest task-mvp
+npx create-expo-app@latest task-mvp --template blank
 
 # 2. Entra al directorio del proyecto
 cd task-mvp
@@ -59,10 +59,10 @@ yarn
 npm install @react-navigation/native @react-navigation/stack
 
 # Peers de React Navigation
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
 # AsyncStorage para persistencia
-expo install @react-native-async-storage/async-storage
+npm install @react-native-async-storage/async-storage
 
 
 ## Estructura del proyecto
@@ -79,17 +79,17 @@ task-mvp/
 
 ├─ navigation/
 
-│  └─ AppNavigator.js
+│  └─ AppNavigator.jsx
 
 ├─ screens/
 
-│  ├─ TaskListScreen.js
+│  ├─ TaskListScreen.jsx
 
-│  └─ AddTaskScreen.js
+│  └─ AddTaskScreen.jsx
 
 └─ components/
 
-   └─ TaskItem.js
+   └─ TaskItem.jsx
 
 
 - App.js: Punto de entrada. Importa y renderiza AppNavigator.
