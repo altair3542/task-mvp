@@ -1,83 +1,95 @@
 // screens/TaskListScreen.jsx
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  ScrollView,
+  StyleSheet
+} from 'react-native';
 
 export default function TaskListScreen({ navigation }) {
-  const appTitle = 'Mis Tareas';
-
-  // Estado local de tareas
   const [tasks, setTasks] = useState([
-    // { id: 1, title: 'Comprar leche', completed: false },
+    { id: 1, title: 'Comprar leche', completed: false },
     { id: 2, title: 'Enviar email', completed: true },
     { id: 3, title: 'Leer documentación', completed: false },
   ]);
+  const [filterMode, setFilterMode] = useState('all'); // 'all' | 'pending' | 'completed'
 
-  // Función que recibirá la nueva tarea
+  // Función para añadir una nueva tarea al estado
   const addTask = (task) => {
-    setTasks(prevTasks => [...prevTasks, task]);
+    setTasks(prev => [...prev, task]);
   };
 
-  const totalTasks   = tasks.length;
-  const pendingTasks = tasks.filter(t => !t.completed).length;
-
-
-  if (totalTasks === 0) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.message}>No hay tareas disponibles</Text>
-        <Button
-          title="Crear nueva tarea"
-          onPress={() => navigation.navigate('AddTask', { addTask })}
-        />
-      </View>
-    )
-  } else if (totalTasks < 3) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.message}>Solo tienes unas pocas tareas ({totalTasks})</Text>
-      <Button
-        title="Crear nueva tarea"
-        onPress={() => navigation.navigate('AddTask', { addTask })}
-      />
-      </View>
-    )
+  // Derivar listado según filtro
+  let displayedTasks;
+  switch (filterMode) {
+    case 'pending':
+      displayedTasks = tasks.filter(t => !t.completed);
+      break;
+    case 'completed':
+      displayedTasks = tasks.filter(t => t.completed);
+      break;
+    default:
+      displayedTasks = tasks;
   }
 
   return (
     <View style={styles.container}>
-        <Text style={styles.header}>
-          {appTitle} ({totalTasks})
-        </Text>
-        <Text style={styles.subheader}>
-          Pendientes: {pendingTasks}
-        </Text>
-
-        {/* Lista desplazable de tareas */}
-        <ScrollView style={styles.list}>
-          {tasks.map(task => (
-            <Text key={task.id} style={styles.taskItem}>
-              {task.title} {task.completed ? '✅' : '⌛️'}
-            </Text>
-          ))}
-        </ScrollView>
-
-        {/* Botón para ir al formulario, pasando addTask */}
+      {/* Fila de botones de filtro */}
+      <View style={styles.filterRow}>
         <Button
-          title="Crear nueva tarea"
-          onPress={() => navigation.navigate('AddTask', { addTask })}
+          title="Todas"
+          onPress={() => setFilterMode('all')}
+          color={filterMode === 'all' ? '#007AFF' : undefined}
+        />
+        <Button
+          title="Pendientes"
+          onPress={() => setFilterMode('pending')}
+          color={filterMode === 'pending' ? '#007AFF' : undefined}
+        />
+        <Button
+          title="Completadas"
+          onPress={() => setFilterMode('completed')}
+          color={filterMode === 'completed' ? '#007AFF' : undefined}
         />
       </View>
+
+      {/* Lista filtrada */}
+      <ScrollView style={styles.list}>
+        {displayedTasks.map(task => (
+          <View key={task.id} style={styles.taskRow}>
+            <Text style={styles.icon}>
+              {task.completed ? '✅' : '⌛️'}
+            </Text>
+            <Text
+              style={[
+                styles.taskText,
+                task.completed ? styles.completedText : styles.pendingText,
+              ]}
+            >
+              {task.title}
+            </Text>
+          </View>
+        ))}
+      </ScrollView>
+
+      {/* Botón para crear nueva tarea, pasamos addTask */}
+      <Button
+        title="Crear nueva tarea"
+        onPress={() => navigation.navigate('AddTask', { addTask })}
+      />
+    </View>
   );
 }
 
-
 const styles = StyleSheet.create({
-  container:  { flex: 1, padding: 16, backgroundColor: '#fff' },
-  header:     { fontSize: 22, fontWeight: 'bold', marginBottom: 4 },
-  subheader:  { fontSize: 16, marginBottom: 12 },
-  list:       { flex: 1, marginBottom: 12 },
-  taskItem:   { fontSize: 14, paddingVertical: 4 },
-  message:   { fontSize: 18, marginBottom: 12 },
+  container:    { flex: 1, padding: 16, backgroundColor: '#fff' },
+  filterRow:    { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 12 },
+  list:         { flex: 1, marginBottom: 12 },
+  taskRow:      { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
+  icon:         { fontSize: 18, marginRight: 8 },
+  taskText:     { fontSize: 16 },
+  completedText:{ textDecorationLine: 'line-through', color: '#888' },
+  pendingText:  { color: '#000' },
 });
-
-// holi
