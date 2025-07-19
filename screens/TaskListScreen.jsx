@@ -36,6 +36,7 @@ export default function TaskListScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text>Task Master</Text>
       {/* Fila de botones de filtro */}
       <View style={styles.filterRow}>
         <Button
