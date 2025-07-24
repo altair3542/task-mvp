@@ -29,3 +29,25 @@
 // // Evita anidar demasiados if/else; considera un switch o crear función auxiliar.
 
 // // Siempre pon break en cada case para evitar “caída” (fall-through).
+
+
+// como declarar funciones en JS.
+
+// declaración:
+function doble(x) {
+  return x*2
+}
+
+// hoisted (que la funcion se declara en tiempo de ejecucion antes de llegar a la linea donde se ejecuta o se declara, pero no necesariamente se opera.)
+
+
+// Expresiones:
+const triple = function(x){
+  return x*3
+}
+
+// la expresion indica que la variable esta definida directamente como el resultado de la funcion que necesitamos ejecutar.
+
+
+// Arrow function (this)
+const suma = (a,b) => a+b
