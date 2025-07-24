@@ -94,3 +94,6 @@ const styles = StyleSheet.create({
   completedText:{ textDecorationLine: 'line-through', color: '#888' },
   pendingText:  { color: '#000' },
 });
+
+
+// aqui voy a explicar git, otra vez
